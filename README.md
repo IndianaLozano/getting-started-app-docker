@@ -18,3 +18,14 @@ The . at the end of the docker build command tells Docker that it should look fo
 docker run -dp 127.0.0.1:3000:3000 getting-started
 ```
 The -d flag (short for --detach) runs the container in the background. The -p flag (short for --publish) creates a port mapping between the host and the container. The -p flag takes a string value in the format of HOST:CONTAINER, where HOST is the address on the host, and CONTAINER is the port on the container. The command publishes the container's port 3000 to 127.0.0.1:3000 (localhost:3000) on the host. Without the port mapping, you wouldn't be able to access the application from the host.
+
+El comando
+```
+sudo aa-remove-unknown
+```
+se puede utilizar para solucionar errores del tipo `Error response from daemon: cannot stop container: containerId: permission denied `
+
+To remove a container in a single command, add force flag:
+```
+docker rm -f <the-container-id>
+```
