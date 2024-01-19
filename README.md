@@ -29,3 +29,35 @@ To remove a container in a single command, add force flag:
 ```
 docker rm -f <the-container-id>
 ```
+
+# Empezando 
+
+Este repositorio es una aplicación de ejemplo para usuarios que siguen la guía de inicio en https://docs.docker.com/get-started/.
+
+La aplicación se basa en la aplicación del tutorial de inicio en https://github.com/docker/getting-started
+
+```
+docker build -t getting-started .
+```
+El comando docker build utiliza el Dockerfile para construir una nueva imagen. Puede haber notado que Docker descargó muchas "capas". Esto se debe a que le indicó al constructor que quería comenzar desde la imagen node:18-alpine. Pero, dado que no la tenía en su máquina, Docker necesitó descargar la imagen.
+
+Después de descargar la imagen, las instrucciones del Dockerfile copiaron su aplicación y utilizaron yarn para instalar las dependencias de su aplicación. La directiva CMD especifica el comando predeterminado para ejecutar al iniciar un contenedor a partir de esta imagen.
+
+Finalmente, la bandera -t etiqueta su imagen. Piense en esto como un nombre legible por humanos para la imagen final. Dado que nombró la imagen como getting-started, puede hacer referencia a esa imagen cuando ejecuta un contenedor.
+
+El punto . al final del comando docker build le dice a Docker que debería buscar el Dockerfile en el directorio actual.
+```
+docker run -dp 127.0.0.1:3000:3000 getting-started
+```
+La bandera -d (abreviatura de --detach) ejecuta el contenedor en segundo plano. La bandera -p (abreviatura de --publish) crea un mapeo de puertos entre el host y el contenedor. La bandera -p toma un valor de cadena en el formato HOST:CONTAINER, donde HOST es la dirección en el host y CONTAINER es el puerto en el contenedor. El comando publica el puerto 3000 del contenedor en 127.0.0.1:3000 (localhost:3000) en el host. Sin el mapeo de puertos, no podría acceder a la aplicación desde el host.
+
+El comando
+```
+sudo aa-remove-unknown
+```
+se puede utilizar para solucionar errores del tipo `Error response from daemon: cannot stop container: containerId: permission denied `
+
+To remove a container in a single command, add force flag:
+```
+docker rm -f <the-container-id>
+```
